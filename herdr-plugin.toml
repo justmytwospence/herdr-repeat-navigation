@@ -1,0 +1,24 @@
+id = "repeat-navigation"
+name = "Repeat Navigation"
+version = "0.1.0"
+min_herdr_version = "0.9.3"
+description = "Client-side tmux-style navigation repeat with automatic timeout; no persistent mode or agent acknowledgement."
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "status"
+title = "Repeat navigation: settings"
+contexts = ["global"]
+command = ["python3", "-B", "repeat.py", "action", "status"]
+
+[[actions]]
+id = "enable"
+title = "Repeat navigation: enable on this host"
+contexts = ["global"]
+command = ["python3", "-B", "repeat.py", "action", "enable"]
+
+[[actions]]
+id = "disable"
+title = "Repeat navigation: disable on this host"
+contexts = ["global"]
+command = ["python3", "-B", "repeat.py", "action", "disable"]
