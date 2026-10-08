@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://agent-box.sh/schema/agentbox.schema.json
+tasks:
+  # The dotfiles (~/dotfiles/docs/agentbox.md): chezmoi as host agentbox-box. /usr/bin/git
+  # because `git` in a box is AgentBox's shim, which relays clones to the hub and refuses
+  # -q; the dotfiles repo is public.
+  dotfiles:
+    command: |
+      set -e
+      test -d ~/dotfiles || /usr/bin/git clone -q https://github.com/justmytwospence/dotfiles.git ~/dotfiles
+      /usr/bin/git -C ~/dotfiles fetch -q origin
+      /usr/bin/git -C ~/dotfiles reset -q --hard origin/main
+      /usr/bin/git -C ~/dotfiles clean -ffdq
+      test -x ~/.local/bin/chezmoi || sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin -t v2.73.0
+      ~/.local/bin/chezmoi init --source ~/dotfiles --apply --force --no-tty \
+          --promptChoice host=agentbox-box --promptString extras=
