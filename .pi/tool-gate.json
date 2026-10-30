@@ -1,0 +1,6 @@
+{
+  "directories": {
+    "read": ["~/Projects/pi-plugins"],
+    "write": ["~/Projects/dotfiles"]
+  }
+}
